@@ -108,4 +108,36 @@ int main()
   * `static bool isInRange(int value, int min, int max)` – проверява дали число е в даден интервал  
   * `static bool isValidFacultyNumber(const std::string& fn)` – проверява дали факултетният номер е във валиден формат  
   * `static bool startsWith(const std::string& value, const std::string& prefix)` – проверява дали текстът започва с даден префикс  
-  * `static bool endsWith(const std::string& value, const std::string& suffix)` – проверява дали текстът завършва с даден суфикс  
+  * `static bool endsWith(const std::string& value, const std::string& suffix)` – проверява дали текстът завършва с даден суфикс
+
+### Задача 3
+Създайте клас `IntDynamicArray`, който реализира динамичен масив от цели числа (`int`) и управлява паметта си.
+
+- **Клас:**
+  - `IntDynamicArray` – динамичен масив от тип `int`
+
+- **Член-данни:**
+  - указател към динамична памет
+  - капацитет (колко е голям вътрешният масив)
+  - текущ брой елементи (колко елемента съдържа)
+
+- **Конструктори**
+  - `IntDynamicArray()` – създава празен масив
+  - `IntDynamicArray(size_t capacity)` – създава масив с начален капацитет
+  - `IntDynamicArray(const IntDynamicArray& other)` – копиращ конструктор
+  - `~IntDynamicArray()` – освобождава паметта
+
+- **Методи:**
+  - `void pushBack(int value)` – добавя елемент в края
+  - `void popBack()` – премахва последния елемент (елегантно ;) )
+  - `int getAt(size_t index) const` – връща елемент на даден индекс
+  - `void setAt(size_t index, int value)` – променя елемент на даден индекс
+  - `size_t getSize() const` – връща броя елементи
+  - `size_t getCapacity() const` – връща капацитета
+  - `bool isEmpty() const` – проверява дали масивът е празен
+  - `void resize(size_t newCapacity)` – преоразмерява масива при нужда (обикновено capacity*2)
+
+- **Изисквания:**
+  - класът да управлява сам паметта си
+  - при запълване на капацитета да се заделя нов по-голям масив
+  - да не се допуска изтичане на памет
