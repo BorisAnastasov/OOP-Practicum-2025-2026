@@ -1,0 +1,143 @@
+### Теория
+Какво ще се отпечата?
+
+```cpp
+#include <iostream>
+
+class Tracker
+{
+public:
+    static int total;
+    Tracker() { ++total; }
+};
+
+int Tracker::total = 0;
+
+int main()
+{
+    Tracker a, b;
+    std::cout << Tracker::total << std::endl;
+
+    Tracker c;
+    std::cout << Tracker::total << std::endl;
+}
+```
+
+```cpp
+#include <iostream>
+
+class A
+{
+    int value;
+
+public:
+    A(int v) : value(v) {}
+
+    static void printValue()
+    {
+        std::cout << value << std::endl;
+    }
+};
+
+int main()
+{
+    A obj(42);
+    A::printValue(); 
+}
+```
+
+```cpp
+#include <iostream>
+#define SQUARE(a) a * a
+
+int main()
+{
+    std::cout << SQUARE(3 + 1) << std::endl;
+}
+```
+
+
+### Задача 1
+Създайте клас `Student` и клас `StudentRepository`, както следва:
+
+* **Private полета:**  
+  * `id`  
+  * `name`  
+  * `facultyNumber`
+
+* **Конструктори:**  
+  * **Parameterized constructor** – задава всички полета  
+  * **Default constructor = default**
+
+* **Student – Методи:**  
+  * `print()` – извежда информацията за студента  
+
+* **StudentRepository – Private полета:**  
+  * `std::vector<Student> students`  
+  * `std::string filename` – файлът, в който се съхраняват студентите  
+  * `static int nextId` – генерира следващото ID  
+
+* **StudentRepository – Конструктор:**  
+  * `StudentRepository(const std::string& filename)` – задава файла и зарежда студентите от него при създаване на repository-то  
+
+* **StudentRepository – Методи:**  
+  * `void addStudent(const std::string& name, const std::string& facultyNumber)` – създава студент с автоматично генерирано `id` и го добавя в repository-то  
+  * `std::optional<Student> findById(int id)` – намира студент по `id`
+  * `bool updateStudent(int id, const std::string& name, const std::string& facultyNumber)` – обновява информацията за студент по `id`  
+  * `bool deleteStudent(int id)` – изтрива студент по `id`  
+  * `void save()` – записва всички студенти във файла  
+  * `void load()` – зарежда студентите от файла  
+  * `std::vector<Student> getAll()` – връща всички студенти
+ 
+### Задача 2
+Създайте клас `ValidationUtils`, който съдържа статични методи за валидиране на най-често използвани типове данни.
+
+* **Клас:**  
+  * `ValidationUtils` – съдържа само `static` методи и не изисква създаване на обект
+
+* **Конструктори:**  
+  * `ValidationUtils() = delete` – забранява създаването на обекти от класа
+
+* **ValidationUtils – Методи:**  
+  * `static bool isEmpty(const std::string& value)` – проверява дали даден текст е празен  
+  * `static bool isNumber(const std::string& value)` – проверява дали текстът съдържа само цифри  
+  * `static bool isValidEmail(const std::string& email)` – проверява дали даден текст е валиден имейл адрес  
+  * `static bool isValidLength(const std::string& value, size_t min, size_t max)` – проверява дали дължината на текста е в даден интервал  
+  * `static bool isAlphabetic(const std::string& value)` – проверява дали текстът съдържа само букви  
+  * `static bool isAlphanumeric(const std::string& value)` – проверява дали текстът съдържа само букви и цифри  
+  * `static bool isInRange(int value, int min, int max)` – проверява дали число е в даден интервал  
+  * `static bool isValidFacultyNumber(const std::string& fn)` – проверява дали факултетният номер е във валиден формат  
+  * `static bool startsWith(const std::string& value, const std::string& prefix)` – проверява дали текстът започва с даден префикс  
+  * `static bool endsWith(const std::string& value, const std::string& suffix)` – проверява дали текстът завършва с даден суфикс
+
+### Задача 3
+Създайте клас `IntDynamicArray`, който реализира динамичен масив от цели числа (`int`) и управлява паметта си.
+
+- **Клас:**
+  - `IntDynamicArray` – динамичен масив от тип `int`
+
+- **Член-данни:**
+  - указател към динамична памет
+  - капацитет (колко е голям вътрешният масив)
+  - текущ брой елементи (колко елемента съдържа)
+
+- **Конструктори**
+  - `IntDynamicArray()` – създава празен масив
+  - `IntDynamicArray(size_t capacity)` – създава масив с начален капацитет
+  - `IntDynamicArray(const IntDynamicArray& other)` – копиращ конструктор
+  - `~IntDynamicArray()` – освобождава паметта
+
+- **Методи:**
+  - `void pushBack(int value)` – добавя елемент в края
+  - `void popBack()` – премахва последния елемент (елегантно ;) )
+  - `int getAt(size_t index) const` – връща елемент на даден индекс
+  - `void setAt(size_t index, int value)` – променя елемент на даден индекс
+  - `size_t getSize() const` – връща броя елементи
+  - `size_t getCapacity() const` – връща капацитета
+  - `bool isEmpty() const` – проверява дали масивът е празен
+  - `void resize(size_t newCapacity)` – преоразмерява масива при нужда (обикновено capacity*2)
+
+- **Изисквания:**
+  - класът да управлява сам паметта си
+  - при запълване на капацитета да се заделя нов по-голям масив
+  - да не се допуска изтичане на памет
