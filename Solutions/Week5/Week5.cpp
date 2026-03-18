@@ -11,10 +11,7 @@
 //		std::cout<<std::endl;
 //	}
 //}
-
-int main()
-{
-	/*int rows = 5, cols = 4;
+/*int rows = 5, cols = 4;
 	double** arr = new double* [rows];
 	for (size_t i = 0; i < rows; i++)
 	{
@@ -29,4 +26,7 @@ int main()
 	Matrix newMatrix = m.transposed();
 	std::cout << std::endl;
 	print(newMatrix.data, newMatrix.rows, newMatrix.cols);*/
+int main()
+{
+	
 }

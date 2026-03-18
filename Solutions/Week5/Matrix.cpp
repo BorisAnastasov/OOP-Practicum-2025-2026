@@ -4,7 +4,6 @@
 //size_t rows;
 //size_t cols;
 
-
 void Matrix::copyFrom(const Matrix& other)
 {
 	rows = other.rows;
