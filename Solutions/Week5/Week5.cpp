@@ -26,6 +26,9 @@
 	Matrix newMatrix = m.transposed();
 	std::cout << std::endl;
 	print(newMatrix.data, newMatrix.rows, newMatrix.cols);*/
+
+
+
 int main()
 {
 	

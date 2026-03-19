@@ -1,6 +1,6 @@
 #include "Parking.h"
 
-//Car* car;
+//Car* cars;
 //size_t count;
 //size_t capacity;
 
@@ -15,6 +15,16 @@ void Parking::copyFrom(const Parking& other)
 	}
 }
 
+void Parking::moveFrom(Parking&& other)
+{
+	cars = other.cars;
+	count = other.count;
+	capacity = other.capacity;
+
+	other.capacity = other.count = 0;
+	other.cars = nullptr;
+}
+
 void Parking::free()
 {
 	capacity = 0;
@@ -27,22 +37,36 @@ void Parking::resize(size_t newCapacity)
 	capacity = newCapacity;
 }
 
-Parking::Parking(size_t cap):capacity(cap)
+Parking::Parking(size_t cap) :capacity(cap)
 {
-	cars= new Car[capacity];
+	cars = new Car[capacity];
 }
 
-Parking::Parking(const Parking& other):capacity(other.capacity), count(other.count)
+Parking::Parking(const Parking& other) :capacity(other.capacity), count(other.count)
 {
 	copyFrom(other);
 }
 
+Parking::Parking(Parking&& other)
+{
+	moveFrom(std::move(other));
+}
+
 Parking& Parking::operator=(const Parking& other)
 {
-	if (this != &other) 
+	if (this != &other)
 	{
 		free();
 		copyFrom(other);
+	}
+	return *this;
+}
+
+Parking& Parking::operator=(Parking&& other)
+{
+	if (this != &other) {
+		free();
+		moveFrom(std::move(other));
 	}
 	return *this;
 }
@@ -73,7 +97,7 @@ const Car& Parking::getCar(size_t idx) const
 
 void Parking::removeCar(size_t idx)
 {
-	for (size_t i = idx; i < count-1; i++)
+	for (size_t i = idx; i < count - 1; i++)
 	{
 		cars[i] = cars[i + 1];
 	}
